@@ -80,13 +80,13 @@ void ANumberHUD::UpdateMyName(const FString& PlayerName)
 
 void ANumberHUD::InitUI()
 {
-    APlayerController* PC = GetOwningPlayerController();
-    ANumberPlayerState* PS = PC ? PC->GetPlayerState<ANumberPlayerState>() : nullptr;
-    ANumberGameStateBase* GS = GetWorld()->GetGameState<ANumberGameStateBase>();
+    APlayerController* PlayerController = GetOwningPlayerController();
+    ANumberPlayerState* NumberPlayer = PlayerController ? PlayerController->GetPlayerState<ANumberPlayerState>() : nullptr;
+    ANumberGameStateBase* NumberGameState = GetWorld()->GetGameState<ANumberGameStateBase>();
 
-    if (!MainWidget || !PS || !GS) return;
-    if (!GS->GetGameData().CurrentTurnPlayer) return;
+    if (!MainWidget || !NumberPlayer || !NumberGameState) return;
+    if (!NumberGameState->GetGameData().CurrentTurnPlayer) return;
 
-    UpdateMyName(PS->GetName());
-    UpdateMainWidget(GS->GetGameData());
+    UpdateMyName(NumberPlayer->GetName());
+    UpdateMainWidget(NumberGameState->GetGameData());
 }

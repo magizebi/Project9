@@ -78,8 +78,7 @@ void ANumberGameModeBase::EndGame()
 
     ServerGameState->LockActor->Muticast_UpdateShackle(false);
 
-
-    // 모든 플레이어의 입력을 막기
+    // 모든 플레이어 입력 막기
     for (APlayerState* PS : ServerGameState->PlayerArray)
     {
         if (ANumberPlayerState* NumberPlayer = Cast<ANumberPlayerState>(PS))
@@ -90,12 +89,6 @@ void ANumberGameModeBase::EndGame()
             }
         }
     }
-
-    // 로그 출력
-    UE_LOG(LogTemp, Warning, TEXT("Game Over! Winner: %s"),
-        *ServerGameState->GameData.CurrentTurnPlayer->GetPlayerName());
-
-    // TODO: UMG 위젯 띄우기, 카메라 이동, 사운드 재생 등 추가
 }
 
 void ANumberGameModeBase::HandleJudgement()
